@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>touch | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="touch事件：    1. touchstart    手指触摸到屏幕会触发    2. touchmove    当手指在屏幕上移动时触发    3. touchend    当手指离开屏幕时会触发    4. touchcancel    当系统停止跟踪触摸时触发    当触控点被特定的实现方式打乱时触发 事件对象target ：触摸的 DOM 节点目标 clientX ：触摸目标在视口中的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="touch">
+<meta property="og:url" content="http://example.com/2018/11/18/touch/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="touch事件：    1. touchstart    手指触摸到屏幕会触发    2. touchmove    当手指在屏幕上移动时触发    3. touchend    当手指离开屏幕时会触发    4. touchcancel    当系统停止跟踪触摸时触发    当触控点被特定的实现方式打乱时触发 事件对象target ：触摸的 DOM 节点目标 clientX ：触摸目标在视口中的">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2018-11-18T05:47:40.000Z">
+<meta property="article:modified_time" content="2020-11-18T05:47:58.616Z">
+<meta property="article:author" content="Mr.Zhang">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-touch" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/11/18/touch/" class="article-date">
+  <time datetime="2018-11-18T05:47:40.000Z" itemprop="datePublished">2018-11-18</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      touch
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>touch事件：<br>    1. touchstart<br>    手指触摸到屏幕会触发<br>    2. touchmove<br>    当手指在屏幕上移动时触发<br>    3. touchend<br>    当手指离开屏幕时会触发<br>    4. touchcancel<br>    当系统停止跟踪触摸时触发<br>    当触控点被特定的实现方式打乱时触发</p>
+<h4 id="事件对象"><a href="#事件对象" class="headerlink" title="事件对象"></a>事件对象</h4><pre><code>target ：触摸的 DOM 节点目标
+clientX ：触摸目标在视口中的 x 坐标
+clientY ：触摸目标在视口中的 y 坐标
+pageX ：触摸目标在页面中的 x 坐标
+pageY ：触摸目标在页面中的 y 坐标
+screenX ：触摸目标在屏幕中的 x 坐标
+screenY ：触摸目标在屏幕中的 y 坐标
+touches ：表示当前跟踪的触摸操作的 Touch 对象的数组
+targetTouchs ：特定于事件目标的 Touch 对象的数组
+changeTouches ：表示自上次触摸以来发生了什么改变的 Touch 对象的数组</code></pre>
+<figure class="highlight js"><table><tr><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// 帮元素传到某个函数里面去绑定事件，然后传进去的回调函数作为事件处理程序</span><br>    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">swipeLeft</span>(<span class="hljs-params">ele, fn</span>) </span>&#123;<br>        ele.flag = <span class="hljs-literal">false</span>;<br>        ele.startX = <span class="hljs-literal">undefined</span>;<br>        ele.startY = <span class="hljs-literal">undefined</span>;<br>        ele.endX = <span class="hljs-literal">undefined</span>;<br>        ele.endY = <span class="hljs-literal">undefined</span>;<br>        ele.addEventListener(<span class="hljs-string">&#x27;touchstart&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;<br>            <span class="hljs-comment">// 触摸开始</span><br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;touchstart&#x27;</span>);<br>            <span class="hljs-built_in">this</span>.flag = <span class="hljs-literal">true</span>;<br><br>            <span class="hljs-comment">// 记录 手指第一次触摸的坐标</span><br>            <span class="hljs-built_in">this</span>.startX = event.touches[<span class="hljs-number">0</span>].clientX;<br>            <span class="hljs-built_in">this</span>.startY = event.touches[<span class="hljs-number">0</span>].clientY;<br><br>        &#125;);<br><br>        ele.addEventListener(<span class="hljs-string">&#x27;touchmove&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;<br>            <span class="hljs-comment">// console.log(event.touches[0]);</span><br>            <span class="hljs-comment">// clientX: 80: 手指触摸点： 相对于可视区域下的坐标x</span><br>            <span class="hljs-comment">// clientY: 46：手指触摸点： 相对于可视区域下的坐标</span><br>            <span class="hljs-comment">// pageX: 80： 相对于页面的坐标X</span><br>            <span class="hljs-comment">// pageY: 46  相对于页面的坐标Y</span><br>            <span class="hljs-comment">// 触摸开始</span><br>            <span class="hljs-comment">// console.log(&#x27;touchmove&#x27;);</span><br>            <span class="hljs-built_in">this</span>.endX = event.touches[<span class="hljs-number">0</span>].clientX;<br>            <span class="hljs-built_in">this</span>.endY = event.touches[<span class="hljs-number">0</span>].clientY;<br><br>        &#125;);<br><br>        ele.addEventListener(<span class="hljs-string">&#x27;touchend&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">event</span>) </span>&#123;<br>            <span class="hljs-comment">// 触摸结束</span><br>            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;touchend&#x27;</span>);<br><br>            <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.flag) &#123;<br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.endX - <span class="hljs-built_in">this</span>.startX &gt; <span class="hljs-number">30</span>) &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;向右&#x27;</span>);<br>                &#125;<br><br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.endX - <span class="hljs-built_in">this</span>.startX &lt; -<span class="hljs-number">30</span>) &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;向左&#x27;</span>);<br>                    fn &amp;&amp; fn();<br>                &#125;<br><br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.endY - <span class="hljs-built_in">this</span>.startY &gt; <span class="hljs-number">30</span>) &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;向下&#x27;</span>);<br>                &#125;<br><br>                <span class="hljs-keyword">if</span> (<span class="hljs-built_in">this</span>.endY - <span class="hljs-built_in">this</span>.startY &lt; -<span class="hljs-number">30</span>) &#123;<br>                    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;向上&#x27;</span>);<br>                &#125;<br><br>                <span class="hljs-built_in">this</span>.flag = <span class="hljs-literal">false</span>;<br>            &#125;<br>        &#125;);<br>    &#125;<br><br>    swipeLeft(<span class="hljs-built_in">window</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;123&#x27;</span>);<br>    &#125;);<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="zepto中的封装事件"><a href="#zepto中的封装事件" class="headerlink" title="zepto中的封装事件"></a>zepto中的封装事件</h4><pre><code>tap： 模拟点击事件
+singleTap： 单击事件
+longTap： 长按事件
+swipeUp： 向上滑事件
+swipeDown： 向下滑事件
+swipeLeft： 向左滑事件
+swiperRight: 向右滑事件</code></pre>
+<figure class="highlight html"><table><tr><td class="code"><pre><code class="hljs html"><span class="hljs-comment">&lt;!-- 首先引入zepto --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./js/zepto.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-comment">&lt;!-- 引入touch模块 --&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">&quot;./js/touch.js&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br><span class="hljs-tag">&lt;<span class="hljs-name">script</span>&gt;</span><br><br><span class="javascript"><span class="hljs-comment">// 触摸点击</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;tap&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;tap&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 单击事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;singleTap&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;singletap&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 双击事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;doubleTap&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;doubleTap&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 长按事件， 超过750ms</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;longTap&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;longTap&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 滑动事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;swipe&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;swipe&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 上滑事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;swipeUp&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;swipeUp&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 下滑事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;swipeDown&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;swipeDown&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 左滑事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;swipeLeft&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;swipeLeft&#x27;</span>);</span><br>&#125;);<br><br><span class="javascript"><span class="hljs-comment">// 右滑事件</span></span><br><span class="javascript">$(<span class="hljs-built_in">window</span>).on(<span class="hljs-string">&#x27;swipeRight&#x27;</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="javascript">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&#x27;swipeRight&#x27;</span>);</span><br>&#125;);<br><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span><br></code></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2018/11/18/touch/" data-id="ckhnamhze00049ctubyfo5aio" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2020/11/18/socket/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          socket
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2020/11/18/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2020/11/18/socket/">socket</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/18/touch/">touch</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 Mr.Zhang<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
